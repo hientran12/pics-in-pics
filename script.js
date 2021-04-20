@@ -1,5 +1,7 @@
 const videoElement = document.getElementById('video');
-const button = document.getElementById('start-button');
+const startBtn = document.getElementById('start-button');
+const shareScrBtn = document.getElementById('share-button');
+
 
 //promt to select media stream, pass to video elem and play it
 async function selectMediaStream() {
@@ -15,13 +17,25 @@ async function selectMediaStream() {
 }
 
 // add Event Listener
-button.addEventListener('click', async () => {
-    //Disable Button
-    button.disable = true;
-    //Start Picture in Pictrue
-    await videoElement.requestPictureInPicture();
-    // Reset Button
-    button.disable = false;
+startBtn.addEventListener('click', async () => {
+    try {
+        await videoElement.requestPictureInPicture();
+    } catch (error) {
+        selectMediaStream();
+    }
+    
 });
-// Onload
+
+shareScrBtn.addEventListener('click', async () => {
+    try {
+        if (document.pictureInPictureElement) {
+            document.exitPictureInPicture();
+        }
+        selectMediaStream();
+    } catch (error) {
+        console.log('error is:', error);
+    }
+});
+
+//on Load
 selectMediaStream();
