@@ -43,3 +43,7 @@ body {
     filter: brightness(110%);
     background   : linear-gradient(to bottom, darkgoldenrod, yellow);
 }
+
+.start-button:active{
+    transform    : translate(-50%, -48%);
+}
